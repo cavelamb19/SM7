@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Course detail page</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+
+
+
+  </head>
+
+<body onload="viewcourse()">
+   <!--- <i class="fa fa-home" style="padding-left: 50px; font-size: 40px;"></i> -->
+    <h4 id="name" style="text-align: end; padding-right: 40px;">Welcome</h1>
+
+<hr>
+  
+
+<div class="container">
+<div class="row">
+<div class="sidenav" style="height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(235, 219, 187);
+  overflow-x: hidden;
+  padding-top: 20px;">
+ 
+ <i class="fa fa-home" style="padding-left: 110px; font-size: 40px;" onClick="home()"></i> 
+      
+        <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" style="padding-left: 80px; padding-top: 40px;" href="#" onclick="mycourse()">My Courses</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " style="padding-left: 70px; padding-top: 40px;" href="#">Class Schedule</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" style="padding-left: 70px; padding-top: 40px;" href="#" onclick="availablecourse()">Available Courses</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"style="padding-left: 70px; padding-top: 40px;"  href="#">Courses Completed</a>
+                </li>
+              </ul>
+    </div>
+  </div>      
+</div>
+
+
+         
+<div class="main" style="margin-left : 360px">
+          
+
+          <div class="container" id="coursedetailscontainer">
+            <div id="coursesdetails" style="border-radius:25px; border:solid; border-color: gray;">
+             
+        
+            
+            </div>
+
+            <br>
+            <br>
+            <div id="coursedescription" style="border-radius:25px; border:solid; border-color: gray;">
+              <h4 style="padding-left: 450px;">Course Description</h4>
+          
+            </div>
+
+        <br>
+        <br>
+        <div id="preRequisites" style="border-radius:25px; border:solid; border-color: gray;">
+              <h4 style="padding-left:450px;">Pre Requisites</h4>
+              
+        </div>
+
+        <br>
+        <br>
+        <div id="classsize" style="border-radius:25px; border:solid; border-color: gray;">
+              <h4 style="padding-left:450px;">Class Size</h4>
+              
+              
+        </div>
+
+        <br>
+        <br>
+        <div id="currentenroll" style="border-radius:25px; border:solid; border-color: gray;">
+              <h4 style="padding-left:450px;">Currently Enrolled</h4>
+              
+              
+        </div>
+        <br>
+        <br>
+        
+       
+        
+
+  </div>
+
+
+
+
+<script>
+
+  function home(){
+        
+        let obj = Object.fromEntries(new URLSearchParams(location.search));
+
+        var staffID= obj['id']; 
+        var classid= obj['classid'];
+
+        //console.log(staffID);
+
+          var url= "Learnerhomepage.html?id="+ staffID;
+
+
+
+       location.href=url;
+  }
+  
+
+  function viewcourse(){
+
+      let obj = Object.fromEntries(new URLSearchParams(location.search));
+
+      var staffID= obj['id']; 
+      var classid= obj['classid'];
+
+      
+      var service_URL="http://localhost:5000/learner/" + staffID
+   
+         $.ajax({
+            url: service_URL,
+            type: 'get',
+            dataType: "json",
+            success: function (response) {
+            //console.log(response)
+                if (response.code == "200") {
+
+                    var data = response.data;
+                    var staffid= data.StaffID;
+                    var name= data.Name;
+                    var role= data.Role;
+
+                  document.getElementById("name").innerHTML = `<h6>Welcome, <b>${name} (${role})</b></h6>`
+                  
+                } else{
+                  alert("something went wrong");
+                }
+
+            },  
+           
+
+        });
+
+        var class_URL="http://localhost:5000/course/classesID/" + classid
+
+         $.ajax({
+            url: class_URL,
+            type: 'get',
+            dataType: "json",
+            success: function (response) {
+            //console.log(response)
+                if (response.code == "200") {
+
+                    var data = response.data;
+                    
+                    var coursename= data.courseName;
+                    var coursedesc= data.courseDesc;
+                    var preRequisites= data.preRequisites;
+                    
+
+                    var class_URL="http://localhost:5000/classes/" + classid
+                        $.ajax({
+
+                          url: class_URL,
+                          type: 'get',
+                          dataType: "json",
+                          success: function (response) {
+
+                             // console.log(response)
+
+                            if(response.code == "200"){
+
+                              var classdata=response.data ;
+
+                              var starttime= classdata.startTime ;
+                              var startdate= classdata.startDate;
+                              var enddate= classdata.endDate;
+                              var endtime= classdata.endTime;
+                              var classid= classdata.classesID;
+                              var classsize=classdata.classesSize;
+                              var trainer= classdata.trainerAssigned;
+                              var currentenroll= classdata.currentEnrolled;
+                              
+
+                        
+                      var coursedetails= ` <h4 style="padding-left: 450px;">${coursename}</h4> 
+                                            <br>
+                                            <br>
+                                            <p style="padding-left:450px;">Start: ${startdate}</p>
+                                            <p style="padding-left:450px;">End:  ${enddate}</p>
+                                            <p style="padding-left:450px;"> Class timing:  ${starttime} - ${endtime}</p>
+                                            <p style="padding-left:450px;">Trainer:  ${trainer}</p>`  
+                                          
+                      document.getElementById("coursesdetails").innerHTML += coursedetails;  
+                      
+                      
+                      var coursedescription= `<br>
+                                              <br>
+                                              <p style="padding-left:450px;">${coursedesc}</p> `
+                              
+                            
+                      document.getElementById("coursedescription").innerHTML += coursedescription;  
+
+                      var preReq= `<br>
+                                    <br>
+                                    <p style="padding-left:450px;">${preRequisites}</p>`
+
+                      
+                      document.getElementById("preRequisites").innerHTML += preReq;
+                      
+                      
+
+                      var csize= `<br>
+                                  <br>
+                                  <p style="padding-left:450px;">${classsize} Students</p>`
+                                  
+                                  
+                      document.getElementById("classsize").innerHTML+= csize;
+                    
+                    
+
+
+                      var enrollno= `<br>
+                                     <br>
+                                      <p style="padding-left:450px;">${currentenroll} Students </p>`
+
+                      document.getElementById("currentenroll").innerHTML+= enrollno;
+
+                    
+                    
+                      
+                    }else{
+                        alert("something went wrong");
+
+
+                    }
+                },
+                  });
+                    
+              } else{
+                  alert("something went wrong");
+                }
+
+            },  
+           
+
+        });
+ }
+
+
+
+
+
+
+</script>
+
+
+</script>
+
+ 
+  
+
+
+ <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+  </script>
+    
+</body>
+</html>
