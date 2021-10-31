@@ -28,7 +28,7 @@
         <button style="margin-right:30px;" id="learner6" type="button" class="btn btn-dark" value="6" onclick="loginlearner3()">Learner David</button>
         <button style="margin-right:30px;" id="trainer2" type="button" class="btn btn-dark" value="2" onclick="logintrainer()">Trainer Roger</button>
         <button style="margin-right:30px;" id="trainer7" type="button" class="btn btn-dark" value="7" onclick="logintrainer2()">Trainer John</button>
-        <button style="margin-right:30px;" id="admin1" type="button" class="btn btn-dark" value="1" onclick="loginadmin()">Administrator Henry</button>
+        <button style="margin-right:30px;" id="admin" type="button" class="btn btn-dark" value="1" onclick="loginadmin()">Administrator Henry</button>
         
 </div>
 
@@ -167,7 +167,7 @@
     }
 
     function loginadmin() {
-        var id =document.getElementById("admin1").value;
+        var id =document.getElementById("admin").value;
         var service_URL="http://localhost:5000/employee/" + id
 
          $.ajax({
