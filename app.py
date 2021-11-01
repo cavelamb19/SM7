@@ -185,7 +185,7 @@ class Quiz(db.Model):
         
 
     def json(self):
-        return {"quizID": self.quizID,"quizDuration":self.quizDuration,
+        return {"quizID": self.quizID,"quizDuration": self.quizDuration,
          "attemptNo":self.attemptNo, "quizTitle":self.quizTitle, "quizDesc":self.quizDesc,
          "lessonID":self.lessonID}
 
