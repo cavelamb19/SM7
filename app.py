@@ -151,7 +151,7 @@ class Lesson(db.Model):
     
     
 
-    def __init__(self, lessonID,courseMaterial,classesID):
+    def __init__(self, lessonID, courseMaterial, classesID):
         self.lessonID = lessonID
         self.courseMaterial = courseMaterial
         self.classesID = classesID
