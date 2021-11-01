@@ -174,7 +174,7 @@ class Quiz(db.Model):
     quizDesc =  db.Column(db.String(50))
     lessonID = db.Column(db.Integer, db.ForeignKey('Lesson.lessonID'))
     
-    def __init__(self, quizID,quizDuration, attemptNo, quizTitle, quizDesc, lessonID):
+    def __init__(self, quizID, quizDuration, attemptNo, quizTitle, quizDesc, lessonID):
         self.quizID = quizID
         self.quizDuration = quizDuration
         self.attemptNo = attemptNo
