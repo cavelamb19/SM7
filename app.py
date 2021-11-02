@@ -551,7 +551,7 @@ def add_question():
             {
                 "code": 200,
                 "data": question.json()
-                } 
+                }  
         ), 200
 
     except Exception as e:
