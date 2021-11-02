@@ -360,7 +360,7 @@ def find_course_by_classesid(classesID):
         )
     return jsonify(
         {
-        "code": 404,
+        "code": 404, 
         "message": "No Course found."
         }
 ), 404
