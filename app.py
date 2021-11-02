@@ -95,7 +95,7 @@ class Course(db.Model):
 
        
 
-    def json(self):
+    def json(self): 
         return {"courseID": self.courseID, "courseName": self.courseName,
         "courseDesc": self.courseDesc, "preRequisites": self.preRequisites, "classesID": self.classesID}
 
