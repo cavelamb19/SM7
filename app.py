@@ -529,7 +529,7 @@ def add_question():
 
     questionlist = request.get_json()
 
-    #print(enrollcourse)
+    #print(enrollcourse) 
     if not all(key in questionlist.keys() for
                key in ( 'question', 'answer',  'lessonID')):
          return jsonify({
