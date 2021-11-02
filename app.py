@@ -275,7 +275,7 @@ def staffid(staffid):
         
 ###########################################################
 
-#trainer
+#trainer 
 @app.route("/trainer/<int:trainerid>")
 def trainerid(trainerid):
     trainer = Trainer.query.filter_by(id=trainerid).first()
