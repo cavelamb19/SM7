@@ -443,7 +443,7 @@ def lesson(classesID):
 def quiz_info():
     
 
-        quizInfo = request.get_json()
+        quizInfo = request.get_json() 
 
         #print(enrollcourse)
         if not all(key in quizInfo.keys() for
