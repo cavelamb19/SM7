@@ -474,7 +474,7 @@ def quiz_info():
             }
         ), 200
 
-        except Exception as e:
+        except Exception as e: 
                return jsonify({
             "message": "Unable to commit to database."
         }), 500
