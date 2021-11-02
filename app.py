@@ -171,7 +171,7 @@ class Quiz(db.Model):
     quizDuration = db.Column(db.String(50))
     attemptNo = db.Column(db.String(50))
     quizTitle = db.Column(db.String(50))
-    quizDesc =  db.Column(db.String(50)) 
+    quizDesc =  db.Column(db.String(50))  
     lessonID = db.Column(db.Integer, db.ForeignKey('Lesson.lessonID'))
     
     def __init__(self, quizID, quizDuration, attemptNo, quizTitle, quizDesc, lessonID):
