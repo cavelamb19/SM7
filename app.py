@@ -337,7 +337,7 @@ def getallCourse():
         return jsonify({
             "code": 200,
             "data": {
-               "course": [course.json() for course in courselist]
+               "course": [course.json() for course in courselist] 
             }
         }), 200
     
