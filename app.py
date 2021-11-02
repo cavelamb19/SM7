@@ -13,7 +13,7 @@ db = SQLAlchemy(app)
 
 CORS(app)
 
-class Employee(db.Model): 
+class Employee(db.Model):  
     __tablename__ = 'employee'
 
     StaffID = db.Column(db.Integer, primary_key=True)
