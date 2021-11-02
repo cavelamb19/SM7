@@ -43,7 +43,7 @@ class Employee(db.Model):
 
     
 
-class Learner(Employee):
+class Learner(Employee): 
     __tablename__ = 'learner'
 
     id= db.Column(db.Integer, db.ForeignKey('employee.StaffID'),primary_key=True)
