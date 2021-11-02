@@ -12,7 +12,7 @@ class TestEmployee(unittest.TestCase):
             'Username' : 'csok',
             'Email' : 'csoki@gmail.com',
             'CurrentDesignation' : 'administrator',
-            'Department' : 'hr',
+            'Department' : 'hr',,
             'ContactNo' : '90227823'
         })
 
