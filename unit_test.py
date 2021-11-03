@@ -73,7 +73,7 @@ class Testclasses(unittest.TestCase):
               'endDate' : '2021-11-18',
               "endTime" : '2021-11-18 06:30:00',
               "classesSize" : 50,
-              "trainerAssigned" : 'Arnold de Mari'
+              "trainerAssigned" : 'Arnold de Mari',
               "currentEnrolled" : '0'
           })
 
