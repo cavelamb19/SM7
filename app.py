@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'pool_size': 100,
                                            'pool_recycle': 280}
 
 db = SQLAlchemy(app)
-
+ 
 CORS(app)
   
 class Employee(db.Model):
