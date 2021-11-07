@@ -19,7 +19,7 @@ class TestApp(flask_testing.TestCase):
         db.session.remove()
         db.drop_all()
         
-        
+#Daniel      
 class Testgetcourses(TestApp):
     
       def test_get_all_courses(self):
@@ -67,7 +67,7 @@ class Testgetcourses(TestApp):
           ] }})
 
         
-
+#Bernice
 class TestgetLearners(TestApp):
     
       def test_get_all_learners(self):
@@ -126,7 +126,7 @@ class TestgetLearners(TestApp):
 
 
 
-
+#Qi Sheng
 class TestSelfEnrolled(TestApp):
 
     def test_self_enrolled(self):
@@ -194,7 +194,7 @@ class TestSelfEnrolled(TestApp):
         
         
     
-         
+#Terence         
 class TestWithdrawSelfEnrolled(TestApp):
 
     def test_withdraw_self_enrolled_courses(self):
@@ -242,7 +242,7 @@ class TestWithdrawSelfEnrolled(TestApp):
                                                                'Username': 'cons',
                                                                'id': 1}})
 
-
+#Qi Sheng
 class TestAssignLearner(TestApp):
 
     def test_assign_learner(self):
@@ -287,6 +287,7 @@ class TestAssignLearner(TestApp):
                                                                'StaffID': 1,
                                                                'Username': 'cons',
                                                                'id': 1}})
+#Bernice
 class TestCreateQuizInfo(TestApp):
     
       def test_create_quiz_info(self):
@@ -329,7 +330,7 @@ class TestCreateQuizInfo(TestApp):
                                                      }})
           
           
-
+#Daniel
 class TestCreateTrueFalseQuestion(TestApp):
       
       def test_create_True_False_question(self):
@@ -390,7 +391,7 @@ class TestCreateTrueFalseQuestion(TestApp):
                                                                      'qnID': 1,
                                                                      'quizID': 1}]})
               
-
+#Terence
 class TestAddlearnerscore(TestApp):
     
       def test_add_learner_score(self):
