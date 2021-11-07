@@ -12,7 +12,7 @@ app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'pool_size': 100,
 db = SQLAlchemy(app)
 
 CORS(app)
-
+ 
 class Employee(db.Model):
     __tablename__ = 'employee'
 
