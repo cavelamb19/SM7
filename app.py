@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'pool_size': 100,
                                            'pool_recycle': 280}
 
 db = SQLAlchemy(app)
-
+ 
 CORS(app)
   
 class Employee(db.Model):
@@ -132,9 +132,9 @@ class Classes(db.Model):
         "startTime": self.startTime, "endDate": self.endDate,
         "endTime": self.endTime,"classesSize": self.classesSize,"trainerAssigned": self.trainerAssigned, "currentEnrolled": self.currentEnrolled}
     
-    def increaseclasssize(self, num_people, currentEnrolled, classesSize):
-        if (currentEnrolled + num_people) < classesSize:
-            currentEnrolled = currentEnrolled + num_people
+    def IncreaseCurrentEnrolled(self, num_people):
+        if (self.currentEnrolled + num_people) < self.classesSize:
+            self.currentEnrolled += num_people
         else:
             raise Exception("Class is full.")
 
@@ -763,7 +763,7 @@ def assign_course():
 
         #print(enrollcourse)
         if not all(key in assign.keys() for
-                   key in ('learnerid', 'enrolledCourses')):
+                   key in ('learnerid', 'AssignedCourses')):
             return jsonify({
                 "message": "Incorrect JSON object provided."
             }), 500
@@ -777,7 +777,7 @@ def assign_course():
                         "message": "learner not valid."
                     }), 500
 
-                learner.CoursesAssigned= assign['enrolledCourses']
+                learner.CoursesAssigned= assign['AssignedCourses']
                 #print(learner.enrolledCourses)
                 db.session.commit()
                 return jsonify(
