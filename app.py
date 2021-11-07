@@ -132,7 +132,7 @@ class Classes(db.Model):
         "startTime": self.startTime, "endDate": self.endDate,
         "endTime": self.endTime,"classesSize": self.classesSize,"trainerAssigned": self.trainerAssigned, "currentEnrolled": self.currentEnrolled}
     
-    def increaseclasssize(self, num_people, currentEnrolled, classesSize):
+    def IncreaseCurrentEnrolled(self, num_people, currentEnrolled, classesSize):
         if (currentEnrolled + num_people) < classesSize:
             currentEnrolled = currentEnrolled + num_people
         else:
