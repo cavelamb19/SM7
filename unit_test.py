@@ -15,7 +15,7 @@ class TestEmployee(unittest.TestCase):
             'Department' : 'hr',
             'ContactNo' : '90227823'
         })
-
+ 
 class TestLearner(unittest.TestCase):
     def testlearner(self):
         learner = Learner(StaffID = 3, Name = 'Constance Wilkinson', Username = 'cons', Email = 'cons@gmail.com',
