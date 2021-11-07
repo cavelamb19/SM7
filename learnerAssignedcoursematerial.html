@@ -90,7 +90,12 @@
               <div id="status" style="padding-left:20px;"> 
               
               </div>
+              
+             <div id="quizstatus" style="padding-left:40px;">
+                 
 
+             </div>
+               
            
        
          
@@ -203,14 +208,14 @@
 
                       var lessonid= lesson.lessonID;
                       var material= lesson.courseMaterial;
-                      var quizid= lesson.quizID;
+                      
 
                       
                     lessondetails += `
                     
                     
                   <li class="nav-item">
-                  <a class="nav-link" style="padding-left: 70px; padding-top: 40px;" id="${lessonid}" onClick="CourseMaterial('${material}','${quizid}', '${lessonid}')">Week ${lesson_count}</a>
+                  <a class="nav-link" style="padding-left: 70px; padding-top: 40px;" id="${lessonid}" onClick="CourseMaterial('${material}','${lessonid}')">Week ${lesson_count}</a>
                   </li>
                     
                      
@@ -247,23 +252,24 @@
 
 
 
-function CourseMaterial(material, quizid ,lessonid){
+function CourseMaterial(material,lessonid){
         
         
           let obj = Object.fromEntries(new URLSearchParams(location.search));
           var staffID= obj['id']; 
 
+          
         // check whether the lesson material in that lesson had been clicked before by the learner
-        if(sessionStorage.getItem(lessonid) != "1" || sessionStorage.getItem(staffID) != staffID){
+        if(sessionStorage.getItem(lessonid) != staffID || sessionStorage.getItem(staffID) != staffID){
 
          var learning_material= material;
 
          document.getElementById("material").innerHTML =""; 
 
-        materialdetails= `<li style="font-size: 20px;"> <a href="../cavelamb-smu-git/CourseMaterial/${material}" onClick="CompleteCourse('${lessonid}')" target="_blank" >${material}</a></li> ` ;
+        materialdetails= `<li style="font-size: 20px;"> <a href="../SPM7/CourseMaterial/${material}.pdf" onClick="CompleteCourse('${lessonid}')" target="_blank" >${material}</a></li> ` ;
         
-        downloaddetails= `<a href="../cavelamb-smu-git/CourseMaterial/${material}" onClick="CompleteCourse('${lessonid}')" download>
-                           <img src="../cavelamb-smu-git/images/download.png" width= 30px; height=20px;>
+        downloaddetails= `<a href="../SPM7/CourseMaterial/${material}.pdf" onClick="CompleteCourse('${lessonid}')" download>
+                           <img src="../SPM7/images/download.png" width= 30px; height=20px;>
                            </a>`
 
         
@@ -291,7 +297,7 @@ function CourseMaterial(material, quizid ,lessonid){
                 var quizid= quizdata.quizID;
 
 
-                materialdetails += `<li style="font-size: 20px;"> <a href=""  target="_blank" onClick="takequiz('${quizid}')" >${quiztitle}</a></li> `
+                materialdetails += `<li style="font-size: 20px;"> <a href=""  target="_blank" onClick="takequiz('${quizid}')" >${quiztitle}</a></li>`
                 
 
                 document.getElementById("status").innerHTML = ""; 
@@ -309,19 +315,56 @@ function CourseMaterial(material, quizid ,lessonid){
               
             });
         
-       
+       // check if quiz had been attempted by learner before to indicate completion
+       $.ajax({
+        url:  "http://localhost:5000/viewscore/" + staffID,
+        type: 'get',
+        dataType: "json",
+        success: function (response) {
+        console.log(response)
+            if (response.code == "200") {
+             
+             
+              var quizscorelist = response.data;
+                  
+
+              var quiz_id_list=[];
+              for (quiz of quizscorelist){
+
+
+                      var quiz_id=quiz.quizID
+                      quiz_id_list.push(Number(quiz_id));
+              
+              }
+
+
+             if(quiz_id_list.includes(Number((lessonid)))== true){
+
+              document.getElementById("quizstatus").innerHTML =`<span style="color:blue"> &#10003 Completed</span>`;
+             }
+            else{
+
+              document.getElementById("quizstatus").innerHTML ="";
+             }
+              
+              }
+        }      
+              
+            });
+         
         
       }
+
       else{
 
         var learning_material= material;
 
         document.getElementById("material").innerHTML =""; 
 
-        materialdetails= `<li style="font-size: 20px;"> <a href="../cavelamb-smu-git/CourseMaterial/${material}" target="_blank">${material}</a></li> ` ;
+        materialdetails= `<li style="font-size: 20px;"> <a href="../SPM7/CourseMaterial/${material}.pdf" target="_blank">${material}</a></li> ` ;
         
-          downloaddetails= `<a href="../cavelamb-smu-git/CourseMaterial/${material}" download>
-                           <img src="../cavelamb-smu-git/images/download.png" width= 30px; height=20px;>
+          downloaddetails= `<a href="../SPM7/CourseMaterial/${material}.pdf" download>
+                           <img src="../SPM7/images/download.png" width= 30px; height=20px;>
                            </a>`
       
         
@@ -369,8 +412,45 @@ function CourseMaterial(material, quizid ,lessonid){
 
       }  
 
+      // check if quiz had been attempted by learner before to indicate completion
+       $.ajax({
+        url:  "http://localhost:5000/viewscore/" + staffID,
+        type: 'get',
+        dataType: "json",
+        success: function (response) {
+        console.log(response)
+            if (response.code == "200") {
+             
+             
+              var quizscorelist = response.data;
+                  
 
-        
+              var quiz_id_list1=[];
+              for (quiz of quizscorelist){
+
+
+                      var quiz_id=quiz.quizID
+                      quiz_id_list1.push(Number(quiz_id));
+              
+              }
+
+              console.log(quiz_id_list1);
+
+             if(quiz_id_list1.includes(Number((lessonid)))== true){
+
+              document.getElementById("quizstatus").innerHTML =`<span style="color:blue"> &#10003 Completed</span>`;
+             }
+
+             else{
+
+              document.getElementById("quizstatus").innerHTML ="";
+             }
+              
+              }
+        }      
+              
+            });
+     
 
 }
 
@@ -384,7 +464,8 @@ function CompleteCourse(lessonid){
          // This function will only happen if the lesson material is click first time.
          // store the lessonid as key and value as 1 to indicate that the lessonid material has been clicked
          // store the staff ID as well to indicate the learner has click the lesson material before
-         sessionStorage.setItem(lessonid, "1") ;
+
+         sessionStorage.setItem(lessonid, staffID) ;
          sessionStorage.setItem(staffID, staffID);
 
 }
