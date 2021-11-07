@@ -1,7 +1,7 @@
 import unittest
 from app import Administrator, Employee, Learner, Trainer, Course, Classes, Lesson
  
-
+#Daniel
 class TestEmployee(unittest.TestCase):
     def testemployee(self):
         employee = Employee(StaffID = 1, Name = 'Henry loh', Username = 'hen', Email = 'henlow@gmail.com', 
@@ -18,7 +18,7 @@ class TestEmployee(unittest.TestCase):
         })
         
         
-
+#Bernice
 class TestLearner(unittest.TestCase):
     def testlearner(self):
         learner = Learner(StaffID = 3, Name = 'Constance Tan', Username = 'cons', Email = 'constan@gmail.com',
@@ -39,6 +39,7 @@ class TestLearner(unittest.TestCase):
                        
         })
 
+#Terence
 class TestTrainer(unittest.TestCase):
     def testtrainer(self):
         trainer = Trainer(StaffID = 2, Name = 'Roger Ng', Username = 'Rog', Email = 'Rogng@gmail.com',
@@ -56,6 +57,7 @@ class TestTrainer(unittest.TestCase):
             'Role': None
         })
 
+#Terence
 class TestCourse(unittest.TestCase):
     def testcourse(self):
         course = Course(courseID = 1, courseName = 'Software Project Management', courseDesc = 'agile methods',
@@ -68,6 +70,8 @@ class TestCourse(unittest.TestCase):
             'classesID' : 1
         })
 
+
+#Qi Sheng
 class Testclasses(unittest.TestCase):
     def testclasses(self):
         classes= Classes(classesID= 1, startDate="August 18 2021", startTime="8am", 
