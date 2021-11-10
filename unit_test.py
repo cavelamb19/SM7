@@ -161,13 +161,13 @@ class TestQuizscore(unittest.TestCase):
     
   def testQuizscore(self):
       
-      quizscore = Quizscore(qsID=1, quizscore=0 ,quizID=1,learnerID=3)
+      quizscore = Quizscore(qsID=1, quizscore=0 ,quizID=1,learnerID=4)
 
       self.assertEqual(quizscore.json(), {
           'qsID': 1,
           'quizscore': 0,
           'quizID': 1,
-        'learnerID':3,
+        'learnerID':4,
       
      
     })
